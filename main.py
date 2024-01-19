@@ -1,9 +1,7 @@
+from config.envloaders import APP_PORT
 from fastapi import FastAPI
 from user.routes import router
 import uvicorn
-import os
-from dotenv import load_dotenv
-load_dotenv()
 
 app = FastAPI()
 
@@ -14,7 +12,7 @@ def root():
 app.include_router(router)
 
 if __name__ == "__main__":
-    port = int(os.getenv('APP_PORT'))
+    port = int(APP_PORT)
     config = uvicorn.Config("main:app", port=port, log_level="info", reload=True)
     server = uvicorn.Server(config)
     server.run()

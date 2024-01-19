@@ -10,7 +10,20 @@ $ 3.10.12
 $ 23.3.2
 ```
 
-## Installation
+## Set Virtual Env
+
+```bash
+# docs: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+
+# Set virtual env 
+$ python3 -m venv .venv
+
+# Activate virtual env
+$ source .venv/bin/activate
+
+```
+
+## Install packages in a virtual environment 
 
 ```bash
 $ pip install -r requirements.txt
