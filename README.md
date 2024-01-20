@@ -14,7 +14,6 @@ $ 23.3.2
 
 ```bash
 # docs: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
-
 # Set virtual env 
 $ python3 -m venv .venv
 
