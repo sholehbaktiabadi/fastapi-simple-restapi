@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from utils.responses import success
-from authentication.schemas import SignIn
-from user.models import User
+from module.authentication.schemas import SignIn
+from module.user.models import User
 from sqlalchemy.orm import Session
 from config.databases import database
-from authentication.services import create_token
+from module.authentication.services import create_token
 
 auth_routes = APIRouter(prefix='/auth')
 

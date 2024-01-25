@@ -1,11 +1,11 @@
 from fastapi.responses import JSONResponse
 from config.envloaders import APP_PORT
 from fastapi import FastAPI, Request, Depends
-from user.routes import user_router
-from user.protected_routes import protected_router
-from authentication.routes import auth_routes
+from module.user.routes import user_router
+from module.user.protected_routes import protected_router
+from module.authentication.routes import auth_routes
 from utils.exceptions import CustomException
-from authentication.authorizations import jwt_required
+from module.authentication.authorizations import jwt_required
 from utils.responses import ErrorResponseWrapper
 from const.error_types import Ok
 from utils.responses import success

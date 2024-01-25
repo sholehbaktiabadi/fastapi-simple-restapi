@@ -3,8 +3,8 @@ from utils.responses import success
 from sqlalchemy import update
 from sqlalchemy.orm import Session
 from config.databases import database
-from user.models import User
-from user.schemas import UserCreateSchema, UserUpdateSchema
+from module.user.models import User
+from module.user.schemas import UserCreateSchema, UserUpdateSchema
 
 user_router = APIRouter(prefix="/user")
 
