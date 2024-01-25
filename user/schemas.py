@@ -6,11 +6,11 @@ class UserCreateSchema(BaseModel):
     age: int
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserUpdateSchema(BaseModel):
     name: Optional[str] = None
     age: Optional[int] = None
     
     class Config:
-        orm_mode = True
+        from_attributes = True

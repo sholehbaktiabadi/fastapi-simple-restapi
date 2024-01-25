@@ -7,3 +7,5 @@ class User(Base):
     id= Column(Integer, primary_key=True)
     name= Column(String)
     age= Column(Integer)
+    phoneNumber= Column(String)
+    password = Column(String)

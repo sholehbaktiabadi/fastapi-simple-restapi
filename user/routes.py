@@ -1,55 +1,48 @@
 from fastapi import APIRouter, Depends
-from utils.responses import response
+from utils.responses import success
 from sqlalchemy import update
 from sqlalchemy.orm import Session
-from config.databases import SessionLocal
+from config.databases import database
 from user.models import User
 from user.schemas import UserCreateSchema, UserUpdateSchema
 
-router = APIRouter(prefix="/user")
+user_router = APIRouter(prefix="/user")
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-@router.get('')
-def getAll(db: Session = Depends(get_db)):
+@user_router.get('')
+def getAll(db: Session = Depends(database)):
     data = db.query(User).all()
-    return response(data)
+    return success(data)
 
-@router.get('/{id}')
-def getOne(id: int, db: Session = Depends(get_db)):
+@user_router.get('/{id}')
+def getOne(id: int, db: Session = Depends(database)):
     selected = db.query(User).filter(User.id == id).first()
     if selected is not None:
-        return response(selected)
-    return response("not found", 400)
+        return success(selected)
+    return success("not found", 400)
 
-@router.delete('/{id}')
-def getOne(id: int, db: Session = Depends(get_db)):
+@user_router.delete('/{id}')
+def getOne(id: int, db: Session = Depends(database)):
     selected = db.query(User).filter(User.id == id).first()
     if selected is not None:
         db.delete(selected)
         db.commit()
-        return response(selected)
-    return response("not found", 400)
+        return success(selected)
+    return success("not found", 400)
         
 
-@router.post('')
-def create(user: UserCreateSchema, db: Session = Depends(get_db)):
+@user_router.post('')
+def create(user: UserCreateSchema, db: Session = Depends(database)):
     newEntity = User(name=user.name, age=user.age)
     db.add(newEntity)
     db.commit()
     db.refresh(newEntity)
-    return response(newEntity)
+    return success(newEntity)
 
-@router.patch('/{id}')
-def updateUser(id: int, user: UserUpdateSchema, db: Session = Depends(get_db)):
+@user_router.patch('/{id}')
+def updateUser(id: int, user: UserUpdateSchema, db: Session = Depends(database)):
         obj = user.model_dump(exclude_none=True)
         upd = update(User)
         val = upd.values(obj)
         cond = val.where(User.id == id)
         db.execute(cond)
-        return response("updated")
+        return success("updated")
