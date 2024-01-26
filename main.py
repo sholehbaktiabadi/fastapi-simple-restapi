@@ -1,13 +1,12 @@
 from fastapi.responses import JSONResponse
 from config.envloaders import APP_PORT
 from fastapi import FastAPI, Request, Depends
-from user.routes import user_router
-from user.protected_routes import protected_router
-from authentication.routes import auth_routes
+from module.user.routes import user_router, user_protected_router
+from module.authentication.routes import auth_routes
 from utils.exceptions import CustomException
-from authentication.authorizations import jwt_required
+from module.authentication.authorizations import authorization
 from utils.responses import ErrorResponseWrapper
-from const.error_types import Ok
+from const.response_msg import Ok
 from utils.responses import success
 import uvicorn
 
@@ -27,7 +26,7 @@ def root():
 
 app.include_router(user_router)
 app.include_router(auth_routes)
-app.include_router(protected_router, dependencies=[Depends(jwt_required)])
+app.include_router(user_protected_router, dependencies=[Depends(authorization)])
 
 if __name__ == "__main__":
     port = int(APP_PORT)
