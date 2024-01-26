@@ -3,7 +3,9 @@ from typing import Optional
 
 class UserCreateSchema(BaseModel):
     name: str
-    age: int
+    phoneNumber: str
+    password: str
+    age: Optional[int] = None
     
     class Config:
         from_attributes = True
