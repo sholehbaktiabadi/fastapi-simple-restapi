@@ -8,4 +8,5 @@ class User(Base):
     name= Column(String)
     age= Column(Integer)
     phoneNumber= Column(String)
-    password = Column(String)
+    password= Column(String)
+    select=['id', 'name', 'phoneNumber', 'age']
